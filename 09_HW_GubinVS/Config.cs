@@ -9,7 +9,7 @@ namespace _09_HW_GubinVS
         /// <summary>
         ///  Путь к файлу с токеном телеграмм
         /// </summary>
-        private static string path = @"C:\Users\gubinvs\Desktop\teltoken.txt";
+        private static string path = @"C:\teltoken.txt";
 
         /// <summary>
         /// Токет чат бота телеграмм, считывается из файла
