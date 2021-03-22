@@ -16,9 +16,9 @@ namespace _09_HW_GubinVS
         /// Метод печатает в консоль принятое сообщение
         /// </summary>
 
-        public static void PrintMessage(string userMessage, string userId, string useFirstrName)
+        public static void PrintMessage(string userMessage, string useFirstrName)
         {
-            string text = $"{useFirstrName} {userId} {userMessage}";
+            string text = $"{useFirstrName} {userMessage}";
 
             Console.WriteLine(text);
 
