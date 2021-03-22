@@ -42,21 +42,20 @@ namespace _09_HW_GubinVS
                         string file_id = msg.message.document.file_id;
                       
                         var w = wc.DownloadString(Config.GetFile + file_id);
-                        Console.WriteLine(w);
-
-                       GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
                         
-                        Console.WriteLine(gf.result.file_path);
-
+                        GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
+                        
                         wc.DownloadFile(Config.DownloadFile + gf.result.file_path, $@"C:\09_HW_GubinVS\09_HW_GubinVS\{msg.message.document.file_name}");
                      
-
                     }
 
 
                 }
 
-                
+                /// Необходимо:
+                /// Cоздать класс для десериализации первого сообщения GetUpdates
+                /// Создать метод BotActions.DownloadFile = который будет выполнять работу по запросу пути к файлу и его скачивание в нужный каталог
+                /// Создать в Config = путь к папке каталогу для скачивания файлов PathDownloadFile
 
 
 
