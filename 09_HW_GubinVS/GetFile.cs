@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace _09_HW_GubinVS
+﻿/// <summary>
+/// Класс содержащий поля при десериализации json - ответ на запрос getFile
+/// получение поля file_path
+/// </summary>
+public class GetFile
 {
-    /// Класс с полями ответа сервера на запрос getFile
-    /// данный запрос делается для того, чтобы получить ссылку на файл присланный боту пользоателем. Необходимое поле ("file_path") для формирования запроса на скачивание данного файла. 
-    class GetFile
-    {
+    public bool ok { get; set; }
+    public Result result { get; set; }
+}
 
-
-    }
+public class Result
+{
+    public string file_id { get; set; }
+    public string file_unique_id { get; set; }
+    public int file_size { get; set; }
+    public string file_path { get; set; }
 }

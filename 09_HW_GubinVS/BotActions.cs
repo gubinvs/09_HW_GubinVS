@@ -36,12 +36,13 @@ namespace _09_HW_GubinVS
                 string responseText = $"Здравствуйте, {useFirstrName}";
                 string url = $"{startUrl}sendMessage?chat_id={userId}&text={responseText}";
                 wc.DownloadString(url);
-                //Console.WriteLine($"Здравствуйте, {useFirstrName}");
+                Console.WriteLine($"Здравствуйте, {useFirstrName}");
             }
 
         }
 
 
+    
 
 
     }
