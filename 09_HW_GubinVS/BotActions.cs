@@ -6,8 +6,11 @@ using System.Net;
 
 namespace _09_HW_GubinVS
 {
-    class Repository
+    class BotActions
     {
+        /// Класс с действиями бота
+
+
 
         /// <summary>
         /// Метод печатает в консоль принятое сообщение

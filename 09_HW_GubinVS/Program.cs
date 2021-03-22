@@ -42,19 +42,18 @@ namespace _09_HW_GubinVS
                     string userId = msg.message.from.id;
                     string useFirstrName = msg.message.from.first_name;
 
-                    // если простое собщение переслать его на мой аккаунд
+                    
 
                     if (CheckingInputParameters.ChekDocument(msg))                                                  //  Проверка на наличие полей document
                     {
-                        string file_name = msg.message.document.file_name;
-                        Console.WriteLine(file_name);
-                        // запустить метод скачивания файла и сохранения его на диск
+                        
+                        
                     }
                     
                     
                 }
 
-
+                
 
 
 
