@@ -22,43 +22,36 @@ namespace _09_HW_GubinVS
             
             while (true)                                                                                            // Цикл бесконечно отправляет запросы серверу Telegram
             {
-                var str = wc.DownloadString(Config.GetUpdates + update_id);                                                                   // объявление переменной в которую помещается ответ полученный с сервера по запросу = getUpdates
-                //Console.WriteLine(str);
-                var msgs = JObject.Parse(str)["result"].ToArray();                                                  // Объявляется переменная в  которую парсится полученный из запроса ответ в виде json файла
+                
+                var str = wc.DownloadString(Config.GetUpdates + update_id);                                         // объявление переменной в которую помещается ответ полученный с сервера по запросу = getUpdates
+                Console.WriteLine(str);
+                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                                                                                 // Объявляется переменная в  которую парсится полученный из запроса ответ в виде json файла
+                Console.WriteLine(gu.result[0].update_id);
+                update_id = gu.result[0].update_id + 1;                                            // Идентификатор сообщение +1 (отмечается как прочитанное)
 
-                foreach (dynamic msg in msgs)                                                                       // цикл перебирает масссив созданный из полученного файла json при получение
-                {
-                    update_id = Convert.ToInt32(msg.update_id) + 1;
-
-                    string userMessage = msg.message.text;
-                    string userId = msg.message.from.id;
-                    string useFirstrName = msg.message.from.first_name;
+                //string userMessage = gu.result[0].message.text;
+                //int userId = gu.result[0].message.from.id;
+                //string useFirstrName = gu.result[0].message.from.first_name;
                     
-                    BotActions.PrintMessage(userMessage, useFirstrName);
+                BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);
 
-
-                    if (CheckingInputParameters.ChekDocument(msg))                                                  //  Проверка на наличие полей document
-                    {
-                        string file_id = msg.message.document.file_id;
-                      
-                        var w = wc.DownloadString(Config.GetFile + file_id);
-                        
-                        GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
-                        
-                        wc.DownloadFile(Config.DownloadFile + gf.result.file_path, $@"C:\09_HW_GubinVS\09_HW_GubinVS\{msg.message.document.file_name}");
-                     
-                    }
-
-
+                
+                if (CheckingInputParameters.ChekDocument(gu))                                                  //  Проверка на наличие полей document
+                {
+                    BotActions.DownloadFile(gu);
                 }
 
+
+
+
                 /// Необходимо:
-                /// Cоздать класс для десериализации первого сообщения GetUpdates
-                /// Создать метод BotActions.DownloadFile = который будет выполнять работу по запросу пути к файлу и его скачивание в нужный каталог
-                /// Создать в Config = путь к папке каталогу для скачивания файлов PathDownloadFile
+                /// готово =Ю Cоздать класс для десериализации первого сообщения GetUpdates
+                /// готово  => Создать метод BotActions.DownloadFile = который будет выполнять работу по запросу пути к файлу и его скачивание в нужный каталог
+                /// готово => Создать в Config = путь к папке каталогу для скачивания файлов PathDownloadFile
 
 
-
+                /// Необходимо переделать проверку CheckingInputParameters.ChekDocument
+                /// Продолжаем проверять сообщения пока оно не обновиться, пустое сообщение приводит к ошибке десериализации
 
 
 

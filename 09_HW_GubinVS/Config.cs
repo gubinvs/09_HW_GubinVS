@@ -32,5 +32,10 @@ namespace _09_HW_GubinVS
         /// </summary>
         public static string DownloadFile { get; } = $@"https://api.telegram.org/file/bot{Token}/"; // добавить обязательный параметр file_path
 
+        /// <summary>
+        /// Путь к локальной папке в который сохраняется полученный файл
+        /// </summary>
+        public static string PathDownloadFile { get; } = $@"C:\Users\gubinvs\Desktop\"; // обязательный праметр название файла с расширением
+
     }
 }

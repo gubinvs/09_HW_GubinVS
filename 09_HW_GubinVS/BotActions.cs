@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
+using System.Text.Json;
 
 namespace _09_HW_GubinVS
 {
@@ -41,8 +43,29 @@ namespace _09_HW_GubinVS
 
         }
 
+        /// <summary>
+        /// Метод принимает десериализованный json (с сообщением в котором есть информация о файле)
+        /// и скачивает файл в папку
+        /// </summary>
+       
+        public static void DownloadFile(GetUpdates getUpdates)
+        {
 
-    
+            WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };
+            string file_id = getUpdates.result[0].message.document.file_id;
+            string file_name = getUpdates.result[0].message.document.file_name;
+
+            // Запрос на сервер telegrfm для получения ссылки на файл в формате json
+            var w = wc.DownloadString(Config.GetFile + file_id);
+
+            // Заполнение структуры из сообщения json
+            GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
+
+            //  Запрос на сервер telegram для скачивания файла
+            wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.DownloadFile + $"{file_name}");
+        }
+
+
 
 
     }
