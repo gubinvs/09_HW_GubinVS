@@ -60,9 +60,9 @@ namespace _09_HW_GubinVS
 
             // Заполнение структуры из сообщения json
             GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
-
             //  Запрос на сервер telegram для скачивания файла
-            wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.DownloadFile + $"{file_name}");
+            wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.PathDownloadFile + $"{file_name}");
+
         }
 
 

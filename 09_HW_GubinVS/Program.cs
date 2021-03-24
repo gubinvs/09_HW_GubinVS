@@ -23,27 +23,26 @@ namespace _09_HW_GubinVS
             while (true)                                                                                            // Цикл бесконечно отправляет запросы серверу Telegram
             {
                 var str = wc.DownloadString(Config.GetUpdates + update_id);
-                //Console.WriteLine(str); 
+                //Console.WriteLine(str);
+                // Дисериализация входящего сообщения в класс GetUpdates
                 GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);
-
-                if (gu.result.Length != 0)
+                
+                if (gu.result.Length != 0)                                                                          // проверка не пустое ли сообщение
                 {
-                    update_id = gu.result[0].update_id + 1;
+                    update_id = gu.result[0].update_id + 1;                                                         // Прибавляем еденицу к текущему сообщению (отметили как прочитанное)
                     
                     if (gu.result[0].message.text != null)
                     {
-                        BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);
-
+                        BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);   // если в сообщении есть текст => вывести его в консоль
                     }
-                    else if (gu.result[0].file_id != null)
+                    else if (gu.result[0].message.document.file_name != null)                                       // если есть в сообщении документ 
                     {
-                        BotActions.DownloadFile(gu);
+                        BotActions.DownloadFile(gu);                                                                // Скачивает файл на диск
                     }
 
                 }
                 
-                /// Необходимо переделать проверку CheckingInputParameters.ChekDocument
-                /// Продолжаем проверять сообщения пока оно не обновиться, пустое сообщение приводит к ошибке десериализации
+                
 
 
 
