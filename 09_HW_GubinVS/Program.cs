@@ -24,9 +24,9 @@ namespace _09_HW_GubinVS
             {
                 var str = wc.DownloadString(Config.GetUpdates + update_id);
                 //Console.WriteLine(str);
-                // Дисериализация входящего сообщения в класс GetUpdates
-                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);
                 
+                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                        // Дисериализация входящего сообщения в класс GetUpdates
+
                 if (gu.result.Length != 0)                                                                          // проверка не пустое ли сообщение
                 {
                     update_id = gu.result[0].update_id + 1;                                                         // Прибавляем еденицу к текущему сообщению (отметили как прочитанное)
