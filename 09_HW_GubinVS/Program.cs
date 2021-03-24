@@ -22,34 +22,26 @@ namespace _09_HW_GubinVS
             
             while (true)                                                                                            // Цикл бесконечно отправляет запросы серверу Telegram
             {
-                
-                var str = wc.DownloadString(Config.GetUpdates + update_id);                                         // объявление переменной в которую помещается ответ полученный с сервера по запросу = getUpdates
-                Console.WriteLine(str);
-                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                        // Объявляется переменная в  которую парсится полученный из запроса ответ в виде json файла
-                Console.WriteLine(gu.result[0].update_id);
-                update_id = gu.result[0].update_id + 1;                                                             // Идентификатор сообщение +1 (отмечается как прочитанное)
+                var str = wc.DownloadString(Config.GetUpdates + update_id);
+                //Console.WriteLine(str); 
+                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);
 
-                //string userMessage = gu.result[0].message.text;
-                //int userId = gu.result[0].message.from.id;
-                //string useFirstrName = gu.result[0].message.from.first_name;
-                    
-                BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);
-
-                
-                if (CheckingInputParameters.ChekDocument(gu))                                                       //  Проверка на наличие полей document
+                if (gu.result.Length != 0)
                 {
-                    BotActions.DownloadFile(gu);
+                    update_id = gu.result[0].update_id + 1;
+                    
+                    if (gu.result[0].message.text != null)
+                    {
+                        BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);
+
+                    }
+                    else if (gu.result[0].file_id != null)
+                    {
+                        BotActions.DownloadFile(gu);
+                    }
+
                 }
-
-
-
-
-                /// Необходимо:
-                /// готово =Ю Cоздать класс для десериализации первого сообщения GetUpdates
-                /// готово  => Создать метод BotActions.DownloadFile = который будет выполнять работу по запросу пути к файлу и его скачивание в нужный каталог
-                /// готово => Создать в Config = путь к папке каталогу для скачивания файлов PathDownloadFile
-
-
+                
                 /// Необходимо переделать проверку CheckingInputParameters.ChekDocument
                 /// Продолжаем проверять сообщения пока оно не обновиться, пустое сообщение приводит к ошибке десериализации
 

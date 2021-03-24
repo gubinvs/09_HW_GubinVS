@@ -35,7 +35,7 @@ namespace _09_HW_GubinVS
         /// <summary>
         /// Путь к локальной папке в который сохраняется полученный файл
         /// </summary>
-        public static string PathDownloadFile { get; } = $@"C:\Users\gubinvs\Desktop\"; // обязательный праметр название файла с расширением
+        public static string PathDownloadFile { get; } = $@"E:\"; // обязательный праметр название файла с расширением
 
     }
 }
