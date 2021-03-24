@@ -25,9 +25,9 @@ namespace _09_HW_GubinVS
                 
                 var str = wc.DownloadString(Config.GetUpdates + update_id);                                         // объявление переменной в которую помещается ответ полученный с сервера по запросу = getUpdates
                 Console.WriteLine(str);
-                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                                                                                 // Объявляется переменная в  которую парсится полученный из запроса ответ в виде json файла
+                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                        // Объявляется переменная в  которую парсится полученный из запроса ответ в виде json файла
                 Console.WriteLine(gu.result[0].update_id);
-                update_id = gu.result[0].update_id + 1;                                            // Идентификатор сообщение +1 (отмечается как прочитанное)
+                update_id = gu.result[0].update_id + 1;                                                             // Идентификатор сообщение +1 (отмечается как прочитанное)
 
                 //string userMessage = gu.result[0].message.text;
                 //int userId = gu.result[0].message.from.id;
@@ -36,7 +36,7 @@ namespace _09_HW_GubinVS
                 BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);
 
                 
-                if (CheckingInputParameters.ChekDocument(gu))                                                  //  Проверка на наличие полей document
+                if (CheckingInputParameters.ChekDocument(gu))                                                       //  Проверка на наличие полей document
                 {
                     BotActions.DownloadFile(gu);
                 }
