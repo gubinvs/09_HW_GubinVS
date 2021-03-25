@@ -6,7 +6,7 @@
         public int date { get; set; }
         public string text { get; set; }
         public Document document { get; set; }
-        public Photo[] Photo { get; set; } 
+        public Photo[] photo { get; set; } 
 
     }
 
