@@ -70,14 +70,15 @@ namespace _09_HW_GubinVS
             WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };
 
             string file_id = getUpdates.result[0].message.photo[2].file_id;
-             string file_name = getUpdates.result[0].message.photo[2].file_unique_id;           
+            //string file_name = getUpdates.result[0].message.photo[2].file_unique_id;           
 
             // Запрос на сервер telegrfm для получения ссылки на файл в формате json
             var w = wc.DownloadString(Config.GetFile + file_id);
 
-
             // Заполнение структуры из сообщения json
             GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
+            string file_name = gf.result.file_path.Remove(0, 7); // Дополнительно удалил от начала 7 символов
+            
             //  Запрос на сервер telegram для скачивания файла
             wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.PathDownloadFile + $"{file_name}");
 
