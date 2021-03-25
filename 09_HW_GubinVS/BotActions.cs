@@ -65,12 +65,16 @@ namespace _09_HW_GubinVS
 
         }
 
+
+        /// <summary>
+        /// Метод принимает сообщение и скачивает фото
+        /// </summary>
+        
         public static void DownloadFoto(GetUpdates getUpdates)
         {
             WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };
 
-            string file_id = getUpdates.result[0].message.photo[2].file_id;
-            //string file_name = getUpdates.result[0].message.photo[2].file_unique_id;           
+            string file_id = getUpdates.result[0].message.photo[2].file_id;         
 
             // Запрос на сервер telegrfm для получения ссылки на файл в формате json
             var w = wc.DownloadString(Config.GetFile + file_id);
