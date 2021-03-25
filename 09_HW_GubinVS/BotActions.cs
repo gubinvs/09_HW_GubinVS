@@ -65,7 +65,11 @@ namespace _09_HW_GubinVS
 
         }
 
-
+        public static void DownloadFoto(GetUpdates getUpdates)
+        { 
+        
+        
+        }
 
 
     }

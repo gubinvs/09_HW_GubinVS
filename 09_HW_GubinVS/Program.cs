@@ -39,6 +39,10 @@ namespace _09_HW_GubinVS
                     {
                         BotActions.DownloadFile(gu);                                                                // Скачивает файл на диск
                     }
+                    else if (gu.result[0].message.Photo.Length != 0)
+                    {
+                        BotActions.DownloadFoto(gu);
+                    }
 
                 }
                 
