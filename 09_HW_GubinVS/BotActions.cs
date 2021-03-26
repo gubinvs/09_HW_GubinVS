@@ -89,6 +89,12 @@ namespace _09_HW_GubinVS
 
         }
 
+        public static void DownloadSticker(GetUpdates getUpdates)
+        { 
+        
+        
+        }
+
 
     }
 }
