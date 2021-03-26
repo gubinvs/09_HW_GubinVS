@@ -90,9 +90,9 @@ namespace _09_HW_GubinVS
         }
 
         public static void DownloadSticker(GetUpdates getUpdates)
-        { 
-        
-        
+        {
+
+            Console.WriteLine("Пришел стикер, как сделаете графический интерфей - покажу )");
         }
 
 
