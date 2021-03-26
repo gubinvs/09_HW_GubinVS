@@ -16,5 +16,7 @@
         
         public Photo[] photo { get; set; }
 
-    }
+        public Voice voice { get; set; }
+
+}
 

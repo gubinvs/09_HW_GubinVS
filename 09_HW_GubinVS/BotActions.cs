@@ -108,7 +108,7 @@ namespace _09_HW_GubinVS
 
             WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };
 
-            string file_id = getUpdates.result[0].message.photo[2].file_id;
+            string file_id = getUpdates.result[0].message.voice.file_id;
 
             // Запрос на сервер telegrfm для получения ссылки на файл в формате json
             var w = wc.DownloadString(Config.GetFile + file_id);

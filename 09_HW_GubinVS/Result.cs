@@ -6,6 +6,4 @@
     public int file_size { get; set; }
     public string file_path { get; set; }
     public Message message { get; set; }
-
-    public Voice voice { get; set; }
 }

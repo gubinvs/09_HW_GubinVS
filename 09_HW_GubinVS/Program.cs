@@ -52,7 +52,7 @@ namespace _09_HW_GubinVS
                     {
                         BotActions.DownloadSticker(gu);
                     }
-                    else if (gu.result.Any(x => x.voice != null))
+                    else if (gu.result.Any(x => x.message.voice != null))
                     {
                         BotActions.DownloadVoice(gu);
                     }
