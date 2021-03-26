@@ -10,39 +10,39 @@ namespace _09_HW_GubinVS
 {
 
                         
-                        // Бот обладает следующим набором функций:
-                        // Принимает сообщения и команды от пользователя.
-                        // Сохраняет аудиосообщения, картинки и произвольные файлы.
-                        // Позволяет пользователю просмотреть список загруженных файлов.
-                        // Позволяет скачать выбранный файл.
+                                                // Бот обладает следующим набором функций:
+                                                // Принимает сообщения и команды от пользователя.
+                                                // Сохраняет аудиосообщения, картинки и произвольные файлы.
+                                                // Позволяет пользователю просмотреть список загруженных файлов.
+                                                // Позволяет скачать выбранный файл.
 
 
     class Program
     {
         static void Main(string[] args)
         {
-            WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };                                            // экземпляр класса работы с сетью
+            WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };                                                            // экземпляр класса работы с сетью
             
-            int update_id = 0;                                                                                      // возвращаемый номер сообщения обработанного методом по умолчанию = 0
+            int update_id = 0;                                                                                                      // возвращаемый номер сообщения обработанного методом по умолчанию = 0
             
-            while (true)                                                                                            // Цикл бесконечно отправляет запросы серверу Telegram
+            while (true)                                                                                                            // Цикл бесконечно отправляет запросы серверу Telegram
             {
                 var str = wc.DownloadString(Config.GetUpdates + update_id);
                 Console.WriteLine(str);
                 
-                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                                                    // Дисериализация входящего сообщения в класс GetUpdates
+                GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                                        // Дисериализация входящего сообщения в класс GetUpdates
 
-                if (gu.result.Any(x => x.update_id != 0))                                                                                                                           // проверка не пустое ли сообщение
+                if (gu.result.Any(x => x.update_id != 0))                                                                           // проверка не пустое ли сообщение
                 {
-                    update_id = gu.result[0].update_id + 1;                                                                                                                     // Прибавляем еденицу к текущему сообщению (отметили как прочитанное)
+                    update_id = gu.result[0].update_id + 1;                                                                         // Прибавляем еденицу к текущему сообщению (отметили как прочитанное)
 
                     if (gu.result.Any(x => x.message.text != null))
                     {
-                        BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);                                       // если в сообщении есть текст => вывести его в консоль
+                        BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);                   // если в сообщении есть текст => вывести его в консоль
                     }
-                    else if (gu.result.Any(x => x.message.document != null))                                                                                             // если есть в сообщении документ 
+                    else if (gu.result.Any(x => x.message.document != null))                                                        // если есть в сообщении документ 
                     {
-                        BotActions.DownloadFile(gu);                                                                                                                                    // Скачивает файл на диск
+                        BotActions.DownloadFile(gu);                                                                                // Скачивает файл на диск
                     }
                     else if (gu.result.Any(x => x.message.photo != null))
                     {
@@ -51,6 +51,10 @@ namespace _09_HW_GubinVS
                     else if (gu.result.Any(x => x.message.sticker != null))
                     {
                         BotActions.DownloadSticker(gu);
+                    }
+                    else if (gu.result.Any(x => x.voice != null))
+                    {
+                        BotActions.DownloadVoice(gu);
                     }
 
                 }

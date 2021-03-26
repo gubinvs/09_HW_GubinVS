@@ -89,12 +89,37 @@ namespace _09_HW_GubinVS
 
         }
 
+        /// <summary>
+        /// Метод получения стикера (когда будет графический интерфейс)
+        /// </summary>
+        /// <param name="getUpdates"></param>
         public static void DownloadSticker(GetUpdates getUpdates)
         {
 
             Console.WriteLine("Пришел стикер, как сделаете графический интерфей - покажу )");
         }
 
+        /// <summary>
+        /// Метод получения звукового файла
+        /// </summary>
+        /// <param name="getUpdates"></param>
+        public static void DownloadVoice(GetUpdates getUpdates)
+        {
 
+            WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };
+
+            string file_id = getUpdates.result[0].message.photo[2].file_id;
+
+            // Запрос на сервер telegrfm для получения ссылки на файл в формате json
+            var w = wc.DownloadString(Config.GetFile + file_id);
+            Console.WriteLine(w);
+            // Заполнение структуры из сообщения json
+            GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
+            string file_name = gf.result.file_path.Remove(0, 7); // Дополнительно удалил от начала 7 символов
+
+            //  Запрос на сервер telegram для скачивания файла
+            wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.PathDownloadFile + $"{file_name}");
+
+        }
     }
 }

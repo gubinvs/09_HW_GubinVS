@@ -12,13 +12,9 @@
 
         public Document document { get; set; }
 
-        public Sticker sticker { get; set; }
-
+        public Sticker sticker { get; set; }      
+        
         public Photo[] photo { get; set; }
 
-
-
-
-
-}
+    }
 
