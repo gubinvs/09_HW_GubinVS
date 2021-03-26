@@ -18,5 +18,7 @@
 
         public Voice voice { get; set; }
 
+        public Video_Note video_note { get; set; }
+
 }
 

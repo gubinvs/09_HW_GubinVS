@@ -121,5 +121,30 @@ namespace _09_HW_GubinVS
             wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.PathDownloadFile + $"{file_name}");
 
         }
+
+        /// <summary>
+        /// Метод получения видео файла
+        /// </summary>
+        /// <param name="getUpdates"></param>
+        public static void DownloadVideo(GetUpdates getUpdates)
+        {
+
+            WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };
+
+            string file_id = getUpdates.result[0].message.video_note.file_id;
+
+            // Запрос на сервер telegrfm для получения ссылки на файл в формате json
+            var w = wc.DownloadString(Config.GetFile + file_id);
+            Console.WriteLine(w);
+            // Заполнение структуры из сообщения json
+            GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
+            string file_name = gf.result.file_path.Remove(0, 12); // Дополнительно удалил от начала 7 символов
+
+            //  Запрос на сервер telegram для скачивания файла
+            wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.PathDownloadFile + $"{file_name}");
+
+        }
+
+
     }
 }

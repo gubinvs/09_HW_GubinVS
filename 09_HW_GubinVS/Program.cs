@@ -56,6 +56,10 @@ namespace _09_HW_GubinVS
                     {
                         BotActions.DownloadVoice(gu);
                     }
+                    else if (gu.result.Any(x => x.message.video_note != null))
+                    {
+                        BotActions.DownloadVideo(gu);
+                    }
 
                 }
 
