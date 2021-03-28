@@ -40,6 +40,7 @@ namespace _09_HW_GubinVS
                     {
                         BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);                   // если в сообщении есть текст => вывести его в консоль
                         BotActions.SendMessageText(wc, gu);                                                                         // отвечает на сообщения
+                      
                     }
                     else if (gu.result.Any(x => x.message.document != null))                                                        // если есть в сообщении документ 
                     {

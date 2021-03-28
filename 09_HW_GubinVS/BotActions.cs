@@ -33,19 +33,21 @@ namespace _09_HW_GubinVS
 
         public static void SendMessageText(WebClient wc, GetUpdates gu)
         {
-            string startUrl = Config.StartUrl;                                              //  Получение основного адреса сервера telegram
-            int userId = gu.result[0].message.from.id;                                      //  Получение параметра идентификатора сообщения
-            string userMessage = gu.result[0].message.text;                                 //  Полуение текста сообщения
+            string startUrl = Config.StartUrl;                                                  //  Получение основного адреса сервера telegram
+            int userId = gu.result[0].message.from.id;                                          //  Получение параметра идентификатора сообщения
+            string userMessage = gu.result[0].message.text;                                     //  Полуение текста сообщения
             string userFirstName = gu.result[0].message.from.first_name;
 
-            if (userMessage == "Hi" || userMessage == "Привет")
+            if (userMessage == "/start")                                                        // ответное сообщение на команду start
             {
-                string responseText = $"Здравствуйте, {userFirstName}\n" +
-                    $"Узнайте что я умею,\n" +
-                    $"нажмите \\start";
-                string url = $"{startUrl}sendMessage?chat_id={userId}&text={responseText}";
-                wc.DownloadString(url);                                                     // отправка сообщения на сервер
-               
+                string text = $"Здравствуйте, {userFirstName}\n"+
+                              "Я умею:\n"+
+                              "1. Принимать Ваши файлы;\n" +
+                              "2. Выводить список документов, которые можно скачать;\n" +
+                              "3. Отвечаю на часто задаваемые вопросы";
+
+                string message = $"{startUrl}sendMessage?chat_id={userId}&text={text}";
+                wc.DownloadString(message);
             }
 
         }
@@ -151,6 +153,7 @@ namespace _09_HW_GubinVS
             wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.PathDownloadFile + $"{file_name}");
 
         }
+
 
 
     }
