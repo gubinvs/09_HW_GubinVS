@@ -39,24 +39,25 @@ namespace _09_HW_GubinVS
                     if (gu.result.Any(x => x.message.text != null))
                     {
                         BotActions.PrintMessage(gu.result[0].message.text, gu.result[0].message.from.first_name);                   // если в сообщении есть текст => вывести его в консоль
+                        BotActions.SendMessageText(wc, gu);                                                                         // отвечает на сообщения
                     }
                     else if (gu.result.Any(x => x.message.document != null))                                                        // если есть в сообщении документ 
                     {
                         BotActions.DownloadFile(gu);                                                                                // Скачивает файл на диск
                     }
-                    else if (gu.result.Any(x => x.message.photo != null))
+                    else if (gu.result.Any(x => x.message.photo != null))                                                           // если есть в сообщении Photo
                     {
                         BotActions.DownloadFoto(gu);
                     }
-                    else if (gu.result.Any(x => x.message.sticker != null))
+                    else if (gu.result.Any(x => x.message.sticker != null))                                                         // если есть в сообщении Sticker
                     {
                         BotActions.DownloadSticker(gu);
                     }
-                    else if (gu.result.Any(x => x.message.voice != null))
+                    else if (gu.result.Any(x => x.message.voice != null))                                                           //  если есть в сообщении голосовое сообщение
                     {
                         BotActions.DownloadVoice(gu);
                     }
-                    else if (gu.result.Any(x => x.message.video_note != null))
+                    else if (gu.result.Any(x => x.message.video_note != null))                                                      // если есть в сообщении видео сообщение
                     {
                         BotActions.DownloadVideo(gu);
                     }

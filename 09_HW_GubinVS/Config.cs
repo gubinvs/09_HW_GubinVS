@@ -22,6 +22,11 @@ namespace _09_HW_GubinVS
         public static string GetUpdates { get; } = $@"https://api.telegram.org/bot{Token}/getUpdates?offset="; // добавить обязательный параметр update_id
 
         /// <summary>
+        /// Основная ссылка (адрес сервера Telegram) для отправки любого сообщения
+        /// </summary>
+        public static string StartUrl { get; } = $@"https://api.telegram.org/bot{Token}/"; // 
+
+        /// <summary>
         /// Ссылка-запрос на сервер для получения параметра file_path 
         /// данный параметр поступает в ответе сервера и необходим для скачивания файла отправленного пользователем боту
         /// </summary>
