@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -49,6 +50,19 @@ namespace _09_HW_GubinVS
                 string message = $"{startUrl}sendMessage?chat_id={userId}&text={text}";
                 wc.DownloadString(message);
             }
+            else if(userMessage == "file")
+            {
+                string[] file = Directory.GetFiles(@"E:\");
+                foreach (var item in file)
+                {
+                    Console.WriteLine(item);                
+                    string message = $"{startUrl}sendMessage?chat_id={userId}&text={item}";
+                    wc.DownloadString(message);
+                }
+
+
+            }
+
 
         }
 
