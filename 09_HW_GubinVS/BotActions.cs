@@ -12,9 +12,6 @@ namespace _09_HW_GubinVS
     class BotActions
     {
         /// Класс с действиями бота
-
-
-
         /// <summary>
         /// Метод печатает в консоль принятое сообщение
         /// </summary>
@@ -41,28 +38,28 @@ namespace _09_HW_GubinVS
 
             if (userMessage == "/start")                                                        // ответное сообщение на команду start
             {
-                string text = $"Здравствуйте, {userFirstName}\n"+
-                              "Я умею:\n"+
-                              "1. Принимать Ваши файлы;\n" +
-                              "2. Выводить список документов, которые можно скачать;\n" +
-                              "3. Отвечаю на часто задаваемые вопросы";
+                string text = $"Здравствуйте, {userFirstName}\n" +
+                              "Я умею:\n" +
+                              "1. Принимать Ваши файлы\n" +
+                              "2. Выводить список загруженных файлов";
 
                 string message = $"{startUrl}sendMessage?chat_id={userId}&text={text}";
                 wc.DownloadString(message);
             }
-            else if(userMessage == "file")
+            else if(userMessage == "/view")
             {
-                string[] file = Directory.GetFiles(@"E:\");
+                string[] file = Directory.GetFiles(Config.PathDownloadFile);
                 foreach (var item in file)
                 {
-                    Console.WriteLine(item);                
-                    string message = $"{startUrl}sendMessage?chat_id={userId}&text={item}";
+                    Console.WriteLine(item);
+                    int symbol = Config.PathDownloadFile.Length;                                    // определять количество символов в пути к папке с файлами
+                    string new_item = item.Remove(0, symbol);                                       // вырезает из сообщения путь к папке с файлами, оставляя только их название
+                    string message = $"{startUrl}sendMessage?chat_id={userId}&text={new_item}";
+                                                                                                        
                     wc.DownloadString(message);
                 }
 
-
             }
-
 
         }
 
