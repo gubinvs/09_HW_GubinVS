@@ -66,7 +66,7 @@ namespace _09_HW_GubinVS
 
                 }
 
-                Thread.Sleep(100);                                                                                   //  Остановка потока на 100 мс
+                Thread.Sleep(100);                                                                                                  //  Остановка потока на 100 мс
             }
 
             

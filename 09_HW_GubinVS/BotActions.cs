@@ -64,6 +64,20 @@ namespace _09_HW_GubinVS
         }
 
         /// <summary>
+        /// Метод отправки документа на сервер telegram
+        /// </summary>
+        public static void SendDocument(string file_name)                                                       // принимает наименование файла с расширением
+        {
+            string path = Config.SendDocumentPath;                                                              // путь к папке с файлом
+           
+            using (FileStream fs = new FileStream(path + file_name, FileMode.Open, FileAccess.Read))
+            {
+
+            }
+        
+        
+        }
+        /// <summary>
         /// Метод принимает десериализованный json (с сообщением в котором есть информация о файле)
         /// и скачивает файл в папку
         /// </summary>
