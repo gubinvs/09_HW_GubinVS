@@ -44,9 +44,9 @@ namespace _09_HW_GubinVS
         /// <summary>
         /// Путь к локальной папке в который сохраняется полученный файл
         /// </summary>
-        public static string PathDownloadFile { get; } = "E:\\bot\\";                                                   // обязательный праметр название файла с расширением
+        public static string PathDownloadFile { get; } = "C:\\09_HW_GubinVS\\09_HW_GubinVS\\bot\\";                                                   // обязательный праметр название файла с расширением
 
-        public static string SendDocumentPath { get; } = "E:\\bot\\";                                                   // путь к папке с файлом для отправки
+        public static string SendDocumentPath { get; } = "C:\\09_HW_GubinVS\\09_HW_GubinVS\\bot\\";                                                   // путь к папке с файлом для отправки
 
 
 
