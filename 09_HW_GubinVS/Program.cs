@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace _09_HW_GubinVS
 {
@@ -23,7 +24,9 @@ namespace _09_HW_GubinVS
         static void Main(string[] args)
         {
             WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };                                                            // экземпляр класса работы с сетью
-            
+            // Список полученных документов
+            List<Doc> document = new List<Doc>();
+
             int update_id = 0;                                                                                                      // возвращаемый номер сообщения обработанного методом по умолчанию = 0
             
             while (true)                                                                                                            // Цикл бесконечно отправляет запросы серверу Telegram
@@ -46,6 +49,18 @@ namespace _09_HW_GubinVS
                     else if (gu.result.Any(x => x.message.document != null))                                                        // если есть в сообщении документ 
                     {
                         BotActions.DownloadFile(gu);                                                                                // Скачивает файл на диск
+                        // заполняем список с данными о загруженных файлах
+                        document.Add(new Doc 
+                        { 
+                            File_id = gu.result[0].message.document.file_id,
+                            File_name = gu.result[0].message.document.file_name
+                        
+                        });
+
+                        foreach (var item in document)
+                        {
+                            Console.WriteLine(item.File_name);
+                        }
                     }
                     else if (gu.result.Any(x => x.message.photo != null))                                                           // если есть в сообщении Photo
                     {
@@ -69,7 +84,9 @@ namespace _09_HW_GubinVS
                 Thread.Sleep(100);                                                                                                  //  Остановка потока на 100 мс
             }
 
-            
+            // Необходимо решить следующую задачу:
+            // При загрузке файла , необходимо создать некий список в котором хранить file_id полученного файла. А при выборе пользователем скачивание этого файла идентифицировать его 
+            // и отправить ссылку пользователю.
 
 
             // Удалить потом

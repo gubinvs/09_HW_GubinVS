@@ -78,8 +78,7 @@ namespace _09_HW_GubinVS
         
         }
         /// <summary>
-        /// Метод принимает десериализованный json (с сообщением в котором есть информация о файле)
-        /// и скачивает файл в папку
+        /// Метод сохраняет принятый файл
         /// </summary>
 
         public static void DownloadFile(GetUpdates getUpdates)
@@ -96,6 +95,8 @@ namespace _09_HW_GubinVS
             GetFile gf = JsonSerializer.Deserialize<GetFile>(w);
             //  Запрос на сервер telegram для скачивания файла
             wc.DownloadFile(Config.DownloadFile + gf.result.file_path, Config.PathDownloadFile + $"{file_name}");
+
+
 
         }
 
