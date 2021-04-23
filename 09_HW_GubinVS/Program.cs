@@ -57,10 +57,6 @@ namespace _09_HW_GubinVS
                         
                         });
 
-                        foreach (var item in document)
-                        {
-                            Console.WriteLine(item.File_name);
-                        }
                     }
                     else if (gu.result.Any(x => x.message.photo != null))                                                           // если есть в сообщении Photo
                     {
