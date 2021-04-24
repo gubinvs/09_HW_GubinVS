@@ -39,7 +39,13 @@ namespace _09_HW_GubinVS
         /// <summary>
         /// Ссылка-запрос на сервер для скачивания полученного файла
         /// </summary>
-        public static string DownloadFile { get; } = $@"https://api.telegram.org/file/bot{Token}/";                     // добавить обязательный параметр file_path
+        public static string DownloadFile { get; } = $@"https://api.telegram.org/file/bot{Token}/"; // добавить обязательный параметр file_path
+
+        /// <summary>
+        /// Ссылка-запрос на сервер для скачивания файла по file_id
+        /// </summary>
+        public static string DownloadFileId { get; } = $@"https://api.telegram.org/file/bot{Token}/sendDocument?"; // добавить обязательный параметр chat_id и file_id
+
 
         /// <summary>
         /// Путь к локальной папке в который сохраняется полученный файл

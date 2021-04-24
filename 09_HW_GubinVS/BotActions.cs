@@ -41,7 +41,8 @@ namespace _09_HW_GubinVS
                 string text = $"Здравствуйте, {userFirstName}\n" +
                               "Я умею:\n" +
                               "1. Принимать Ваши файлы\n" +
-                              "2. Выводить список загруженных файлов";
+                              "2. Выводить список загруженных файлов\n" +
+                              "3. Отправлять Вам выбранные файлы";
 
                 string message = $"{startUrl}sendMessage?chat_id={userId}&text={text}";
                 wc.DownloadString(message);
@@ -55,8 +56,11 @@ namespace _09_HW_GubinVS
                     int symbol = Config.PathDownloadFile.Length;                                    // определять количество символов в пути к папке с файлами
                     string new_item = item.Remove(0, symbol);                                       // вырезает из сообщения путь к папке с файлами, оставляя только их название
                     string message = $"{startUrl}sendMessage?chat_id={userId}&text={new_item}";
-                                                                                                        
+                    // Сообщение-ссылка на скачивание файла
+                    string uri = $"{startUrl}sendMessage?chat_id={userId}&text=Скачать файл:tg://{Config.DownloadFileId}chat_id={userId}&file_id=BQACAgIAAxkBAAIBx2CEV3NFUn6Q8Do7Mk2mXQho9NliAAIoCwACTdUoSBrkE357q7SPHwQ";
                     wc.DownloadString(message);
+                    wc.DownloadString(uri);
+
                 }
 
             }
