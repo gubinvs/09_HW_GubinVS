@@ -46,7 +46,13 @@ namespace _09_HW_GubinVS
         /// </summary>
         public static string PathDownloadFile { get; } = "C:\\09_HW_GubinVS\\09_HW_GubinVS\\bot\\";                                                   // обязательный праметр название файла с расширением
 
-        public static string SendDocumentPath { get; } = "C:\\09_HW_GubinVS\\09_HW_GubinVS\\bot\\";                                                   // путь к папке с файлом для отправки
+        public static string SendDocumentPath { get; } = "C:\\09_HW_GubinVS\\09_HW_GubinVS\\bot\\";       // путь к папке с файлом для отправки
+
+
+        /// <summary>
+        /// Путь к локальной папке в который сохраняется json файл
+        /// </summary>
+        public static string PathJsonFile { get; } = "C:\\09_HW_GubinVS\\document.json";                                                   // обязательный праметр название файла с расширением
 
 
 

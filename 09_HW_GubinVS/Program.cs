@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
 namespace _09_HW_GubinVS
@@ -24,8 +25,11 @@ namespace _09_HW_GubinVS
         static void Main(string[] args)
         {
             WebClient wc = new WebClient() { Encoding = Encoding.UTF8 };                                                            // экземпляр класса работы с сетью
-            // Список полученных документов
-            List<Doc> document = new List<Doc>();
+            // Список полученных документов, 
+            List<Document> docs = new List<Document>();
+            // Десиарилизация данных о прошлых загрузках
+            docs = MySerialization.JsonDeserializer(Config.PathJsonFile);
+            
 
             int update_id = 0;                                                                                                      // возвращаемый номер сообщения обработанного методом по умолчанию = 0
             
@@ -49,13 +53,15 @@ namespace _09_HW_GubinVS
                     else if (gu.result.Any(x => x.message.document != null))                                                        // если есть в сообщении документ 
                     {
                         BotActions.DownloadFile(gu);                                                                                // Скачивает файл на диск
-                        // заполняем список с данными о загруженных файлах
-                        document.Add(new Doc 
+                        // заполняtn список с данными о загруженных файлах
+                        docs.Add(new Document
                         { 
                             File_id = gu.result[0].message.document.file_id,
                             File_name = gu.result[0].message.document.file_name
                         
                         });
+                        // Сериализуется коллекция файлов
+                        MySerialization.JsonSerialize(Config.PathJsonFile, docs);
 
                     }
                     else if (gu.result.Any(x => x.message.photo != null))                                                           // если есть в сообщении Photo
@@ -81,7 +87,8 @@ namespace _09_HW_GubinVS
             }
 
             // Необходимо решить следующую задачу:
-            // При загрузке файла , необходимо создать некий список в котором хранить file_id полученного файла. А при выборе пользователем скачивание этого файла идентифицировать его 
+            // При загрузке файла , необходимо создать некий список в котором хранить file_id полученного файла.
+            // А при выборе пользователем скачивание этого файла идентифицировать его 
             // и отправить ссылку пользователю.
 
 
