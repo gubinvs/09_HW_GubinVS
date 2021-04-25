@@ -36,7 +36,7 @@ namespace _09_HW_GubinVS
             while (true)                                                                                                            // Цикл бесконечно отправляет запросы серверу Telegram
             {
                 var str = wc.DownloadString(Config.GetUpdates + update_id);
-                //Console.WriteLine(str);
+                Console.WriteLine(str);
                 
                 GetUpdates gu = JsonSerializer.Deserialize<GetUpdates>(str);                                                        // Дисериализация входящего сообщения в класс GetUpdates
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace _09_HW_GubinVS
 {
@@ -49,17 +50,24 @@ namespace _09_HW_GubinVS
             }
             else if(userMessage == "/view")
             {
-                string[] file = Directory.GetFiles(Config.PathDownloadFile);
+                string[] file = Directory.GetFiles(Config.PathDownloadFile);                  
+                
+                InlineKeyboardButton button = new InlineKeyboardButton();
+                    button.Text = "Скачать файл";
+                    button.Url = @"http://gubinvs.ru";
+                    button.CallbackData = $"{startUrl}sendMessage?chat_id={userId}&text={button.Text}";
+
                 foreach (var item in file)
                 {
                     Console.WriteLine(item);
+                  
                     int symbol = Config.PathDownloadFile.Length;                                    // определять количество символов в пути к папке с файлами
                     string new_item = item.Remove(0, symbol);                                       // вырезает из сообщения путь к папке с файлами, оставляя только их название
                     string message = $"{startUrl}sendMessage?chat_id={userId}&text={new_item}";
-                    // Сообщение-ссылка на скачивание файла
-                    string uri = $"{startUrl}sendMessage?chat_id={userId}&text=Скачать файл:tg://{Config.DownloadFileId}chat_id={userId}&file_id=BQACAgIAAxkBAAIBx2CEV3NFUn6Q8Do7Mk2mXQho9NliAAIoCwACTdUoSBrkE357q7SPHwQ";
+                
+                  
                     wc.DownloadString(message);
-                    wc.DownloadString(uri);
+               
 
                 }
 
