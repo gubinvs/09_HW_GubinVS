@@ -50,12 +50,21 @@ namespace _09_HW_GubinVS
             }
             else if(userMessage == "/view")
             {
-                string[] file = Directory.GetFiles(Config.PathDownloadFile);                  
-                
-                InlineKeyboardButton button = new InlineKeyboardButton();
-                    button.Text = "Скачать файл";
-                    button.Url = @"http://gubinvs.ru";
-                    button.CallbackData = $"{startUrl}sendMessage?chat_id={userId}&text={button.Text}";
+                string[] file = Directory.GetFiles(Config.PathDownloadFile);
+                var keyboard = new ReplyKeyboardMarkup(new[]
+                {
+                    new [] // first row
+                    {
+                        new KeyboardButton("1.1"),
+                        new KeyboardButton("1.2"),
+                    },
+                    new [] // last row
+                    {
+                        new KeyboardButton("2.1"),
+                        new KeyboardButton("2.2"),
+                    }
+                });
+
 
                 foreach (var item in file)
                 {
@@ -64,10 +73,11 @@ namespace _09_HW_GubinVS
                     int symbol = Config.PathDownloadFile.Length;                                    // определять количество символов в пути к папке с файлами
                     string new_item = item.Remove(0, symbol);                                       // вырезает из сообщения путь к папке с файлами, оставляя только их название
                     string message = $"{startUrl}sendMessage?chat_id={userId}&text={new_item}";
-                
-                  
-                    wc.DownloadString(message);
-               
+                    string mas = $"{startUrl}sendMessage?chat_id={userId}&reply_markup={keyboard}";
+
+                    wc.DownloadString(mas);
+
+                    
 
                 }
 
